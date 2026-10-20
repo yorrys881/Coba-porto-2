@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yorrys Firdausi - Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            bg: '#0f172a',
+                            surface: '#1e293b',
+                            card: '#334155'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0ea5e9; 
+        }
+
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Image hover zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom {
+            transition: transform 0.5s ease;
+        }
+        .img-zoom-container:hover .img-zoom {
+            transform: scale(1.05);
+        }
+
+        /* Modal styling */
+        dialog::backdrop {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center glass rounded-full px-6 py-3 shadow-lg">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-xl font-bold tracking-tighter text-white">
+                        YF<span class="text-brand-500">.</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-gray-300 hover:text-brand-400 transition-colors text-sm font-medium">Home</a>
+                    <a href="#about" class="text-gray-300 hover:text-brand-400 transition-colors text-sm font-medium">About</a>
+                    <a href="#experience" class="text-gray-300 hover:text-brand-400 transition-colors text-sm font-medium">Experience</a>
+                    <a href="#portfolio" class="text-gray-300 hover:text-brand-400 transition-colors text-sm font-medium">Portfolio</a>
+                    <a href="#contact" class="px-5 py-2 rounded-full bg-brand-500 hover:bg-brand-600 text-white transition-all transform hover:scale-105 shadow-lg shadow-brand-500/30 text-sm font-medium">Contact Me</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-4 right-4 glass rounded-2xl p-4 shadow-xl flex flex-col space-y-4">
+            <a href="#home" class="text-gray-300 hover:text-brand-400 font-medium px-4 py-2 rounded-lg hover:bg-white/5">Home</a>
+            <a href="#about" class="text-gray-300 hover:text-brand-400 font-medium px-4 py-2 rounded-lg hover:bg-white/5">About</a>
+            <a href="#experience" class="text-gray-300 hover:text-brand-400 font-medium px-4 py-2 rounded-lg hover:bg-white/5">Experience</a>
+            <a href="#portfolio" class="text-gray-300 hover:text-brand-400 font-medium px-4 py-2 rounded-lg hover:bg-white/5">Portfolio</a>
+            <a href="#contact" class="text-center mt-2 px-5 py-3 rounded-xl bg-brand-500 text-white font-medium">Contact Me</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                
+                <!-- Text Content -->
+                <div class="flex-1 text-center lg:text-left">
+                    <div class="inline-block px-4 py-1.5 rounded-full glass text-brand-400 font-medium text-sm mb-6 border border-brand-500/30 shadow-[0_0_15px_rgba(14,165,233,0.3)]">
+                        Mahasiswa & Kreator Digital
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+                        Halo, Saya <br/>
+                        <span class="text-gradient">Yorrys Firdausi</span>
+                    </h1>
+                    <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Mahasiswa Perkeretaapian yang berdedikasi tinggi, berpengalaman dalam desain grafis, 3D drafting, dan siap memberikan kontribusi maksimal dengan etos kerja profesional.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#portfolio" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold transition-all transform hover:-translate-y-1 shadow-lg shadow-brand-500/30 text-center">
+                            Lihat Karya Saya
+                        </a>
+                        <a href="#about" class="w-full sm:w-auto px-8 py-3.5 rounded-full glass hover:bg-white/10 text-white font-semibold transition-all text-center border border-gray-600">
+                            Tentang Saya
+                        </a>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="mt-10 flex items-center justify-center lg:justify-start space-x-5">
+                        <a href="mailto:yusindarto644@gmail.com" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-brand-400 hover:border-brand-400 transition-colors" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/yorrys-firdausi-0a0249321/" target="_blank" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-brand-400 hover:border-brand-400 transition-colors" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.instagram.com/yorrys_f40/" target="_blank" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-brand-400 hover:border-brand-400 transition-colors" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile Image -->
+                <div class="flex-1 relative animate-float w-full max-w-md lg:max-w-lg">
+                    <!-- Glow effect behind image -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-indigo-500 rounded-full blur-3xl opacity-20"></div>
+                    
+                    <div class="relative rounded-3xl overflow-hidden glass border-2 border-white/10 shadow-2xl p-2">
+                        <img src="Foto profil Yorrys.jpg" alt="Yorrys Firdausi" class="w-full h-auto rounded-2xl object-cover object-top" onerror="this.src='https://placehold.co/600x800/1e293b/0ea5e9?text=Yorrys+Firdausi'">
+                    </div>
+                    
+                    <!-- Floating badges -->
+                    <div class="absolute -left-6 top-1/4 glass px-4 py-3 rounded-xl border border-white/10 shadow-lg flex items-center gap-3 animate-pulse-slow">
+                        <div class="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Skill</p>
+                            <p class="text-sm font-bold">Desain Grafis</p>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -right-8 bottom-1/4 glass px-4 py-3 rounded-xl border border-white/10 shadow-lg flex items-center gap-3 animate-pulse-slow" style="animation-delay: 1.5s;">
+                        <div class="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+                            <i class="fas fa-train"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Jurusan</p>
+                            <p class="text-sm font-bold">Perkeretaapian</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <span class="text-xs text-gray-500 mb-2 uppercase tracking-widest">Scroll</span>
+            <div class="w-6 h-10 rounded-full border-2 border-gray-600 flex justify-center p-1">
+                <div class="w-1 h-2 bg-brand-500 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Education Section -->
+    <section id="about" class="py-24 bg-dark-surface relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold text-brand-400 tracking-wider uppercase mb-2">Profil & Latar Belakang</h2>
+                <h3 class="text-3xl md:text-4xl font-bold">Tentang Saya</h3>
+                <div class="w-20 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- About Text -->
+                <div class="space-y-6">
+                    <div class="glass p-8 rounded-2xl border border-white/5 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/10 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
+                        <h4 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                            <i class="fas fa-user-circle text-brand-500"></i> Pengenalan
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed text-justify">
+                            Mahasiswa Perkeretaapian Politeknik Negeri Madiun semester 6 yang memiliki disiplin tinggi, mampu bekerja sesuai prosedur, serta berkomitmen menjaga kebersihan dan kenyamanan lingkungan kerja. 
+                        </p>
+                        <p class="text-gray-300 leading-relaxed text-justify mt-4">
+                            Aktif dalam berbagai organisasi dan tergabung dalam tim penelitian bersama dosen, sehingga terbiasa bekerja dalam tim, mengatur alur pekerjaan, serta berkomunikasi dengan baik. Memiliki etos kerja yang baik serta siap menjalankan tugas secara profesional dan sesuai standar operasional.
+                        </p>
+                    </div>
+
+                    <!-- Skills Grid -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass p-4 rounded-xl border border-white/5 text-center hover:border-brand-500/50 transition-colors">
+                            <i class="fas fa-pen-nib text-2xl text-brand-400 mb-2"></i>
+                            <h5 class="font-semibold text-sm">Desain Grafis</h5>
+                        </div>
+                        <div class="glass p-4 rounded-xl border border-white/5 text-center hover:border-brand-500/50 transition-colors">
+                            <i class="fas fa-cube text-2xl text-indigo-400 mb-2"></i>
+                            <h5 class="font-semibold text-sm">3D Drafting</h5>
+                        </div>
+                        <div class="glass p-4 rounded-xl border border-white/5 text-center hover:border-brand-500/50 transition-colors">
+                            <i class="fas fa-microchip text-2xl text-green-400 mb-2"></i>
+                            <h5 class="font-semibold text-sm">PLC & IoT</h5>
+                        </div>
+                        <div class="glass p-4 rounded-xl border border-white/5 text-center hover:border-brand-500/50 transition-colors">
+                            <i class="fas fa-camera text-2xl text-yellow-400 mb-2"></i>
+                            <h5 class="font-semibold text-sm">Fotografi & Video</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Timeline -->
+                <div>
+                    <h4 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i class="fas fa-graduation-cap text-brand-500"></i> Riwayat Pendidikan
+                    </h4>
+                    
+                    <div class="relative border-l-2 border-dark-card ml-3 space-y-10">
+                        <!-- Education 1 -->
+                        <div class="relative pl-8">
+                            <div class="absolute w-6 h-6 bg-brand-500 rounded-full -left-[13px] top-1 border-4 border-dark-surface shadow-[0_0_10px_rgba(14,165,233,0.5)]"></div>
+                            <div class="bg-dark-bg p-6 rounded-xl border border-white/5 hover:border-brand-500/30 transition-colors relative overflow-hidden">
+                                <div class="absolute right-0 top-0 text-6xl text-white/5 opacity-20 -mt-2 -mr-2"><i class="fas fa-university"></i></div>
+                                <span class="text-xs font-bold px-3 py-1 bg-brand-500/20 text-brand-400 rounded-full inline-block mb-3">2023 - Sekarang</span>
+                                <h5 class="text-xl font-bold mb-1">D4 Perkeretaapian</h5>
+                                <h6 class="text-brand-400 font-medium mb-3">Politeknik Negeri Madiun</h6>
+                                <p class="text-sm text-gray-400 mb-2"><i class="fas fa-star text-yellow-500 mr-1"></i> IPK: 3.86</p>
+                                <ul class="text-sm text-gray-300 space-y-2 list-disc list-inside">
+                                    <li>Menguasai bidang 3D drafter, mesin produksi, elektronika, otomasi, IoT.</li>
+                                    <li>Koordinator divisi Media & Informasi HMJT.</li>
+                                    <li>Desainer grafis Tim Media Kreatif PNM.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Education 2 -->
+                        <div class="relative pl-8">
+                            <div class="absolute w-6 h-6 bg-gray-600 rounded-full -left-[13px] top-1 border-4 border-dark-surface"></div>
+                            <div class="bg-dark-bg p-6 rounded-xl border border-white/5 hover:border-gray-500/30 transition-colors">
+                                <span class="text-xs font-bold px-3 py-1 bg-gray-700 text-gray-300 rounded-full inline-block mb-3">2020 - 2023</span>
+                                <h5 class="text-xl font-bold mb-1">Teknik Pemesinan</h5>
+                                <h6 class="text-gray-400 font-medium mb-3">SMK Negeri 1 Madiun</h6>
+                                <p class="text-sm text-gray-400 mb-2"><i class="fas fa-trophy text-yellow-500 mr-1"></i> Lulusan terbaik ke-7 (Nilai: 88.07)</p>
+                                <ul class="text-sm text-gray-300 space-y-2 list-disc list-inside">
+                                    <li>Anggota ekstrakurikuler CADDCLUB (Autodesk Inventor).</li>
+                                    <li>Mengoperasikan mesin bubut, frais, CNC milling & turning.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold text-brand-400 tracking-wider uppercase mb-2">Aktivitas & Karir</h2>
+                <h3 class="text-3xl md:text-4xl font-bold">Pengalaman Project</h3>
+                <div class="w-20 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass rounded-2xl p-6 border border-white/5 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl mb-6 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-camera-retro"></i>
+                    </div>
+                    <span class="text-xs text-brand-400 font-semibold tracking-wider">Agt '24 - Des '25</span>
+                    <h4 class="text-lg font-bold mt-2 mb-3 leading-tight">Koord. Sie Dokumentasi ORMIT</h4>
+                    <p class="text-sm text-gray-400 mb-4 line-clamp-3">Membagi tupoksi anggota, menyusun timeline, berkoordinasi antar divisi, dan membuat animasi Twibbon ORMIT 2024.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass rounded-2xl p-6 border border-white/5 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl mb-6 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <span class="text-xs text-indigo-400 font-semibold tracking-wider">Okt 2024</span>
+                    <h4 class="text-lg font-bold mt-2 mb-3 leading-tight">Operator Live Stream E-Sports</h4>
+                    <p class="text-sm text-gray-400 mb-4 line-clamp-3">Membuat desain animasi overlay, setup OBS studio untuk turnamen Mobile Legends, dan mengatur jalannya streaming.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass rounded-2xl p-6 border border-white/5 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center text-xl mb-6 group-hover:bg-pink-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <span class="text-xs text-pink-400 font-semibold tracking-wider">Feb - Des 2024</span>
+                    <h4 class="text-lg font-bold mt-2 mb-3 leading-tight">Ketua Pelaksana Desain Grafis HMJT</h4>
+                    <p class="text-sm text-gray-400 mb-4 line-clamp-3">Membuat template feed instagram, ucapan ulang tahun, live report, desain logo angkatan, ID card, dan foto kepengurusan.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass rounded-2xl p-6 border border-white/5 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-xl mb-6 group-hover:bg-yellow-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <span class="text-xs text-yellow-400 font-semibold tracking-wider">Okt - Des 2025</span>
+                    <h4 class="text-lg font-bold mt-2 mb-3 leading-tight">Tim Riset Mesin Pengering</h4>
+                    <p class="text-sm text-gray-400 mb-4 line-clamp-3">Merancang dimensi, desain 3D komponen, simulasi FEA & CFD, serta menyusun artikel ilmiah mesin pengering kunyit.</p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass rounded-2xl p-6 border border-white/5 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/20 text-green-400 flex items-center justify-center text-xl mb-6 group-hover:bg-green-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <span class="text-xs text-green-400 font-semibold tracking-wider">Nov 2025 - Skrg</span>
+                    <h4 class="text-lg font-bold mt-2 mb-3 leading-tight">Tim Riset PLC Haiwell</h4>
+                    <p class="text-sm text-gray-400 mb-4 line-clamp-3">Merancang trainer kit PLC Haiwell dan membuat sistem kontrol kecepatan motor 3-phase.</p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="glass rounded-2xl p-6 border border-white/5 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl mb-6 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <span class="text-xs text-blue-400 font-semibold tracking-wider">Des '25 - Apr '26</span>
+                    <h4 class="text-lg font-bold mt-2 mb-3 leading-tight">On Station Cleaning KAI</h4>
+                    <p class="text-sm text-gray-400 mb-4 line-clamp-3">Daily worker angkutan Nataru & Lebaran. Melakukan pembersihan area stasiun sesuai SOP dan melayani pelanggan.</p>
+                </div>
+            </div>
+
+            <!-- Achievements & Certifications -->
+            <div class="mt-16 bg-dark-surface rounded-3xl p-8 border border-white/5">
+                <h4 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <i class="fas fa-award text-yellow-500"></i> Penghargaan & Sertifikasi
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-brand-500 mt-1"></i>
+                        <p class="text-sm text-gray-300">Juara 1 lomba logo yang diselenggarakan oleh Politeknik Negeri Madiun.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-brand-500 mt-1"></i>
+                        <p class="text-sm text-gray-300">Juara 1 lomba desain poster anniversarry 8 tahun FORMAKSI PNM.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-brand-500 mt-1"></i>
+                        <p class="text-sm text-gray-300">Sertifikat BNSP bidang produksi gambar bergerak kejuruan Multimedia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 bg-dark-surface relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold text-brand-400 tracking-wider uppercase mb-2">Karya & Desain</h2>
+                <h3 class="text-3xl md:text-4xl font-bold">Galeri Portofolio</h3>
+                <div class="w-20 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Koleksi beberapa karya desain grafis dari berbagai project organisasi dan perlombaan.</p>
+            </div>
+
+            <!-- Filter Buttons (Visual only for now, can be implemented with JS if categories grow) -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="px-5 py-2 rounded-full bg-brand-500 text-white text-sm font-medium transition-colors">Semua</button>
+                <button class="px-5 py-2 rounded-full glass hover:bg-white/10 text-gray-300 text-sm font-medium transition-colors">Logo</button>
+                <button class="px-5 py-2 rounded-full glass hover:bg-white/10 text-gray-300 text-sm font-medium transition-colors">Poster & Banner</button>
+                <button class="px-5 py-2 rounded-full glass hover:bg-white/10 text-gray-300 text-sm font-medium transition-colors">Pakaian</button>
+                <button class="px-5 py-2 rounded-full glass hover:bg-white/10 text-gray-300 text-sm font-medium transition-colors">Lainnya</button>
+            </div>
+
+            <!-- Image Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Portfolio Item 1: Logo -->
+                <div class="group relative rounded-2xl overflow-hidden glass border border-white/5 cursor-pointer h-72 img-zoom-container shadow-lg" onclick="openModal('Yorrys Firdausi_Portofolio_page-0014.jpg', 'Desain Logo')">
+                    <img src="Yorrys Firdausi_Portofolio_page-0014.jpg" alt="Logo Design Portfolio" class="w-full h-full object-cover img-zoom" onerror="this.src='https://placehold.co/800x600/334155/94a3b8?text=Logo+Design'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold text-brand-400 mb-1">Branding</span>
+                        <h4 class="text-xl font-bold text-white">Desain Logo</h4>
+                        <div class="mt-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="inline-flex items-center text-sm font-medium text-white hover:text-brand-400">
+                                Lihat Detail <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2: Poster/Pamphlet -->
+                <div class="group relative rounded-2xl overflow-hidden glass border border-white/5 cursor-pointer h-72 img-zoom-container shadow-lg" onclick="openModal('Yorrys Firdausi_Portofolio_page-0005.jpg', 'Pamphlet & Poster Design')">
+                    <img src="Yorrys Firdausi_Portofolio_page-0005.jpg" alt="Poster Design Portfolio" class="w-full h-full object-cover object-top img-zoom" onerror="this.src='https://placehold.co/800x600/334155/94a3b8?text=Poster+Design'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold text-brand-400 mb-1">Event Material</span>
+                        <h4 class="text-xl font-bold text-white">Pamphlet & Poster</h4>
+                        <div class="mt-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="inline-flex items-center text-sm font-medium text-white hover:text-brand-400">
+                                Lihat Detail <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3: Banner -->
+                <div class="group relative rounded-2xl overflow-hidden glass border border-white/5 cursor-pointer h-72 img-zoom-container shadow-lg" onclick="openModal('Yorrys Firdausi_Portofolio_page-0008.jpg', 'Banner & Background Design')">
+                    <img src="Yorrys Firdausi_Portofolio_page-0008.jpg" alt="Banner Design Portfolio" class="w-full h-full object-cover img-zoom" onerror="this.src='https://placehold.co/800x600/334155/94a3b8?text=Banner+Design'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold text-brand-400 mb-1">Large Format</span>
+                        <h4 class="text-xl font-bold text-white">Banner & BG Design</h4>
+                        <div class="mt-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="inline-flex items-center text-sm font-medium text-white hover:text-brand-400">
+                                Lihat Detail <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 4: Social Media -->
+                <div class="group relative rounded-2xl overflow-hidden glass border border-white/5 cursor-pointer h-72 img-zoom-container shadow-lg" onclick="openModal('Yorrys Firdausi_Portofolio_page-0011.jpg', 'Social Media Feeds')">
+                    <img src="Yorrys Firdausi_Portofolio_page-0011.jpg" alt="Social Media Portfolio" class="w-full h-full object-cover img-zoom" onerror="this.src='https://placehold.co/800x600/334155/94a3b8?text=Social+Media'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold text-brand-400 mb-1">Digital Marketing</span>
+                        <h4 class="text-xl font-bold text-white">Social Media Feed</h4>
+                        <div class="mt-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="inline-flex items-center text-sm font-medium text-white hover:text-brand-400">
+                                Lihat Detail <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 5: Clothes -->
+                <div class="group relative rounded-2xl overflow-hidden glass border border-white/5 cursor-pointer h-72 img-zoom-container shadow-lg" onclick="openModal('Yorrys Firdausi_Portofolio_page-0015.jpg', 'Merchandise & Clothes')">
+                    <img src="Yorrys Firdausi_Portofolio_page-0015.jpg" alt="Clothes Design Portfolio" class="w-full h-full object-cover img-zoom" onerror="this.src='https://placehold.co/800x600/334155/94a3b8?text=Clothes+Design'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold text-brand-400 mb-1">Merchandise</span>
+                        <h4 class="text-xl font-bold text-white">Desain Pakaian</h4>
+                        <div class="mt-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="inline-flex items-center text-sm font-medium text-white hover:text-brand-400">
+                                Lihat Detail <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Portfolio Item 6: Motion Graphic/Misc -->
+                 <div class="group relative rounded-2xl overflow-hidden glass border border-white/5 cursor-pointer h-72 img-zoom-container shadow-lg" onclick="openModal('Yorrys Firdausi_Portofolio_page-0018.jpg', 'Motion Graphics Assets')">
+                    <img src="Yorrys Firdausi_Portofolio_page-0018.jpg" alt="Motion Graphic Portfolio" class="w-full h-full object-cover img-zoom" onerror="this.src='https://placehold.co/800x600/334155/94a3b8?text=Motion+Graphic'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold text-brand-400 mb-1">Animation & Video</span>
+                        <h4 class="text-xl font-bold text-white">Motion Graphic</h4>
+                        <div class="mt-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="inline-flex items-center text-sm font-medium text-white hover:text-brand-400">
+                                Lihat Detail <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                 <!-- Portfolio Item 7: YouTube Thumbnail -->
+                 <div class="group relative rounded-2xl overflow-hidden glass border border-white/5 cursor-pointer h-72 img-zoom-container shadow-lg hidden md:block" onclick="openModal('Yorrys Firdausi_Portofolio_page-0016.jpg', 'YouTube Thumbnails')">
+                    <img src="Yorrys Firdausi_Portofolio_page-0016.jpg" alt="Youtube Thumbnail Portfolio" class="w-full h-full object-cover img-zoom" onerror="this.src='https://placehold.co/800x600/334155/94a3b8?text=Thumbnails'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold text-brand-400 mb-1">Content Creation</span>
+                        <h4 class="text-xl font-bold text-white">YouTube Thumbnail</h4>
+                        <div class="mt-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="inline-flex items-center text-sm font-medium text-white hover:text-brand-400">
+                                Lihat Detail <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 8: Wallpaper -->
+                <div class="group relative rounded-2xl overflow-hidden glass border border-white/5 cursor-pointer h-72 img-zoom-container shadow-lg hidden md:block" onclick="openModal('Yorrys Firdausi_Portofolio_page-0017.jpg', 'Wallpapers')">
+                    <img src="Yorrys Firdausi_Portofolio_page-0017.jpg" alt="Wallpaper Portfolio" class="w-full h-full object-cover img-zoom" onerror="this.src='https://placehold.co/800x600/334155/94a3b8?text=Wallpapers'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs font-bold text-brand-400 mb-1">Digital Art</span>
+                        <h4 class="text-xl font-bold text-white">Wallpaper Design</h4>
+                        <div class="mt-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="inline-flex items-center text-sm font-medium text-white hover:text-brand-400">
+                                Lihat Detail <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Portfolio Empty Slot (for grid balancing on desktop) -->
+                 <div class="hidden lg:flex rounded-2xl border-2 border-dashed border-white/10 items-center justify-center flex-col h-72 text-gray-500 hover:text-brand-400 hover:border-brand-500/50 transition-colors cursor-pointer group">
+                    <i class="fas fa-plus text-3xl mb-3 group-hover:scale-110 transition-transform"></i>
+                    <p class="font-medium">Lebih Banyak Karya</p>
+                    <p class="text-xs mt-1">Segera Datang</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <!-- Background element -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-96 bg-brand-600/10 rounded-full blur-3xl -z-10"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass rounded-3xl p-8 md:p-12 border border-white/10 text-center shadow-2xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Mari Bekerja Sama</h2>
+                <p class="text-gray-400 mb-10 max-w-2xl mx-auto">
+                    Tertarik dengan karya saya atau memiliki project yang ingin didiskusikan? Jangan ragu untuk menghubungi saya melalui kontak di bawah ini.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
+                    <a href="mailto:yusindarto644@gmail.com" class="flex items-center gap-3 px-6 py-4 glass rounded-xl hover:bg-brand-500/10 hover:border-brand-500/50 transition-all w-full sm:w-auto border border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-white">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs text-gray-400">Email</p>
+                            <p class="font-medium text-sm">yusindarto644@gmail.com</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://wa.me/6281934652876" target="_blank" class="flex items-center gap-3 px-6 py-4 glass rounded-xl hover:bg-green-500/10 hover:border-green-500/50 transition-all w-full sm:w-auto border border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white">
+                            <i class="fab fa-whatsapp text-lg"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs text-gray-400">WhatsApp</p>
+                            <p class="font-medium text-sm">+62 819 3465 2876</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex justify-center gap-4">
+                    <a href="https://www.linkedin.com/in/yorrys-firdausi-0a0249321/" target="_blank" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-500 hover:border-brand-500 transition-colors">
+                        <i class="fab fa-linkedin-in text-lg"></i>
+                    </a>
+                    <a href="https://www.instagram.com/yorrys_f40/" target="_blank" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-pink-500 hover:border-pink-500 transition-colors">
+                        <i class="fab fa-instagram text-lg"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-gray-700 hover:border-gray-700 transition-colors" title="Download CV">
+                        <i class="fas fa-download text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-bg py-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-500 text-sm">
+                &copy; 2026 Yorrys Firdausi. All rights reserved.
+            </p>
+            <div class="flex gap-6">
+                <p class="text-gray-500 text-sm flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt text-brand-500"></i> Madiun, Jawa Timur
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <dialog id="imageModal" class="bg-transparent m-auto p-0 w-full h-full max-w-none max-h-none backdrop:bg-dark-bg/90">
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" onclick="closeModal(event)">
+            <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col glass rounded-2xl border border-white/10 overflow-hidden shadow-2xl animate-[fadeIn_0.3s_ease-out]" onclick="event.stopPropagation()">
+                
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center p-4 border-b border-white/10 bg-dark-surface/80">
+                    <h3 id="modalTitle" class="text-xl font-bold text-white">Portfolio Image</h3>
+                    <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-red-500 flex items-center justify-center text-white transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Modal Body -->
+                <div class="p-2 overflow-auto flex-1 flex items-center justify-center bg-black/50">
+                    <img id="modalImage" src="" alt="Full view" class="max-w-full max-h-[75vh] object-contain rounded-lg">
+                </div>
+                
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        // --- Navbar Scroll Effect ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-dark-bg/80', 'backdrop-blur-md', 'shadow-md', 'py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('bg-dark-bg/80', 'backdrop-blur-md', 'shadow-md', 'py-2');
+                navbar.classList.add('py-4');
+            }
+        });
+
+        // --- Mobile Menu Toggle ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- Modal Logic ---
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+
+        function openModal(imageSrc, title) {
+            modalImage.src = imageSrc;
+            modalTitle.textContent = title;
+            modal.showModal();
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            // If event is provided, check if click is outside the content
+            if (event) {
+                const rect = modal.firstElementChild.firstElementChild.getBoundingClientRect();
+                const isOutside = (
+                    event.clientX < rect.left ||
+                    event.clientX > rect.right ||
+                    event.clientY < rect.top ||
+                    event.clientY > rect.bottom
+                );
+                // The structure has a wrapper, so clicking the wrapper closes it. 
+                // Handled by onclick="closeModal(event)" on wrapper and stopPropagation on inner.
+            }
+            modal.close();
+            // Restore body scrolling
+            document.body.style.overflow = 'auto';
+            
+            // Clear image source after small delay to prevent flickering during close animation
+            setTimeout(() => {
+                modalImage.src = '';
+            }, 300);
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.open) {
+                closeModal();
+            }
+        });
+        
+        // CSS for Modal Animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: scale(0.95); }
+                to { opacity: 1; transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
